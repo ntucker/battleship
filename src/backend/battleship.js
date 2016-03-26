@@ -12,7 +12,7 @@ function rand(min, max) {
     return Math.floor(Math.random() * (max-min) + min)
 }
 
-class BattleShip {
+export default class BattleShip {
     constructor() {
         this.myBoard = new Board()
         this.enemyBoard = new Board()
@@ -160,4 +160,3 @@ class Ship {
     }
 }
 
-module.exports = BattleShip
