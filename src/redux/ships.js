@@ -21,6 +21,7 @@ export const shipReducer = handleActions({
     }
   },
   [FIRE]: (state, action) => {
+    if (state.youWin || state.youLose) return state
     let fired
     try {
       fired = battleship.fire(...action.payload)

@@ -12,11 +12,12 @@ import Messages from '../components/Messages'
 export default class BattleShipGame extends Component {
   render() {
     const {enemyBoard, myBoard, myShips, fire, ...props} = this.props
+    const gameDone = props.youWin || props.youLose
     return (
       <section>
         <Messages {...props}/>
         <h3>Enemy</h3>
-        <Board board={enemyBoard} fire={fire} />
+        <Board board={enemyBoard} fire={gameDone ? undefined : fire} />
         <h3>You</h3>
         <Board board={myBoard} ships={myShips}/>
       </section >
