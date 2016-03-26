@@ -14,7 +14,6 @@ export const shipReducer = handleActions({
   [INIT]: (state, action) => {
     battleship = new BattleShip()
     return {
-      ...state,
       myBoard: battleship.myBoard.boardStatus,
       enemyBoard: battleship.enemyBoard.boardStatus,
       myShips: battleship.myShips,
