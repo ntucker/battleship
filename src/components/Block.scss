@@ -9,10 +9,13 @@ block {
   &.miss {
     background-color: rgb(0,0, 100);
   }
+  &.hit, &.miss {
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,.4) inset;
+  }
   &.clickable {
     cursor: crosshair;
     &:hover {
-      box-shadow: 0px 0px 5px 0px rgba(255,255,255,.9);
+      box-shadow: 0px 0px 15px 0px rgba(0,0,0,.9) inset;
       z-index: 1;
       border-top: 1px solid rgba(0,0,0,0);
     }
