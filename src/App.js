@@ -15,10 +15,10 @@ export class App extends Component {
   }
   render() {
     return (
-      <div>
+      <app>
         <BattleShipGame/>
         <button onClick={()=>this.props.init()}>New Game</button>
-      </div>
+      </app>
     )
   }
 }

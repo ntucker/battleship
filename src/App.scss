@@ -1,3 +1,32 @@
 body {
   font-family: Roboto, Arial, Helvetica, sans-serif;
+  color: #333;
+}
+$button-bg: #5697d0;
+button {
+  border-radius: 5px;
+  border: 2px solid darken($button-bg, 10%);
+  color: lighten($button-bg, 50%);
+  background: $button-bg;
+  padding: 15px 25px;
+  cursor: pointer;
+  font-size: 26px;
+  &:hover {
+    background: darken($button-bg, 10%);
+    border-color: darken($button-bg, 20%);
+  }
+}
+section {
+  margin-bottom: 20px;
+}
+
+app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  section {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
