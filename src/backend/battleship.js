@@ -17,7 +17,7 @@ export default class BattleShip {
         this.myBoard = new Board()
         this.enemyBoard = new Board()
         this._ships = []
-        for (let ship of this.myBoard.ships) {
+        for (let ship of this.myBoard._ships) {
             this._ships.push({start: {x: ship.x, y: ship.y}, vertical: ship.vertical, length:ship.length})
         }
     }
@@ -58,12 +58,12 @@ export default class BattleShip {
 
 class Board {
     constructor() {
-        this.ships = []
-        this.coordToShip = []
+        this._ships = []
+        this._coorToShip = []
         for (let i=0; i < BOARD_SIZE; ++i) {
-            this.coordToShip[i] = []
+            this._coorToShip[i] = []
             for (let j=0; j < BOARD_SIZE; ++j) {
-                this.coordToShip[i][j] = null
+                this._coorToShip[i][j] = null
             }
         }
         this.attempts = []
@@ -92,12 +92,12 @@ class Board {
         // set location
         this._setLocation(ship)
         // add to ships
-        this.ships.push(ship)
+        this._ships.push(ship)
         
     }
     _validLocation(x, y, vertical, length) {
         for (let i=0; i < length; ++i) {
-            if (this.coordToShip[y + (vertical ? i : 0)][x + (vertical ? 0 : i)]) return false
+            if (this._coorToShip[y + (vertical ? i : 0)][x + (vertical ? 0 : i)]) return false
         }
         return true
     }
@@ -108,7 +108,7 @@ class Board {
         let vertical = ship.vertical
         let length = ship.length
         for (let i = 0; i < length; ++i) {
-            this.coordToShip[y + (vertical ? i : 0)][x + (vertical ? 0 : i)] = ship
+            this._coorToShip[y + (vertical ? i : 0)][x + (vertical ? 0 : i)] = ship
         }
     }
     get boardStatus() {
@@ -117,7 +117,7 @@ class Board {
             ret.push([])
             for (let j=0; j < BOARD_SIZE; ++j) {
                 if (this.attempts[i][j]) {
-                    ret[i][j] = this.coordToShip[i][j] ? 'X' : '/'
+                    ret[i][j] = this._coorToShip[i][j] ? 'X' : '/'
                 } else {
                     ret[i][j] = null
                 }
@@ -128,17 +128,17 @@ class Board {
     fire(x, y) {
         if (this.attempts[y][x]) throw Error('Already fired there')
         this.attempts[y][x] = true
-        if (this.coordToShip[y][x]) {
-            this.coordToShip[y][x].hit()
+        if (this._coorToShip[y][x]) {
+            this._coorToShip[y][x].hit()
         }
         let allShipsGone = true
-        for (let ship of this.ships) {
+        for (let ship of this._ships) {
             if (!ship.sunk) allShipsGone = false
         }
         
         return {
-            hit: !!this.coordToShip[y][x],
-            sunk: !!this.coordToShip[y][x] && this.coordToShip[y][x].sunk,
+            hit: !!this._coorToShip[y][x],
+            sunk: !!this._coorToShip[y][x] && this._coorToShip[y][x].sunk,
             allShipsGone,
         }
     }
