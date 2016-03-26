@@ -117,7 +117,7 @@ class Board {
             ret.push([])
             for (let j=0; j < BOARD_SIZE; ++j) {
                 if (this.attempts[i][j]) {
-                    ret[i][j] = this._coorToShip[i][j] ? 'X' : '/'
+                    ret[i][j] = this._coorToShip[i][j] ? 'hit' : 'miss'
                 } else {
                     ret[i][j] = null
                 }
@@ -126,7 +126,7 @@ class Board {
         return ret
     }
     fire(x, y) {
-        if (this.attempts[y][x]) throw Error('Already fired there')
+        if (this.attempts[y][x]) throw new Error('Already fired there')
         this.attempts[y][x] = true
         if (this._coorToShip[y][x]) {
             this._coorToShip[y][x].hit()

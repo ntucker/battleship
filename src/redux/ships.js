@@ -8,7 +8,7 @@ const INIT = 'battleship/ships/INIT'
 const FIRE = 'battleship/ships/FIRE'
 
 export const init = createAction(INIT)
-export const fire = createAction(FIRE)
+export const fire = createAction(FIRE, (x,y) => [x,y])
 
 export const shipReducer = handleActions({
   [INIT]: (state, action) => {
@@ -17,13 +17,19 @@ export const shipReducer = handleActions({
       ...state,
       myBoard: battleship.myBoard.boardStatus,
       enemyBoard: battleship.enemyBoard.boardStatus,
-      ships: battleship.myShips,
+      myShips: battleship.myShips,
     }
   },
   [FIRE]: (state, action) => {
+    let fired
+    try {
+      fired = battleship.fire(...action.payload)
+    } catch(e) {
+      return state
+    }
     return {
       ...state,
-      ...battleship.fire(...action.payload),
+      ...fired,
     }
   },
 }, {})

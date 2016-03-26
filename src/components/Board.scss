@@ -1,0 +1,11 @@
+boardrow {
+  display: flex;
+  height: 20px;
+  width: 500px;
+}
+board {
+  position: relative;
+  ship {
+    position: absolute;
+  }
+}
