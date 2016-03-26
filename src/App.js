@@ -10,9 +10,8 @@ import './App.scss'
   {init},
 )
 export class App extends Component {
-  constructor() {
-    super()
-    init()
+  componentDidMount() {
+    this.props.init()
   }
   render() {
     return (
